@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PokeApp"
              x:Class="PokeApp.MainPage">
-
-    <Label Text="This will be awesome!"
+    <StackLayout>
+        <Button Text="Click me!" Clicked="Button_OnClicked"></Button>
+        <Label x:Name="TokenLabel" Text="This will be awesome!"
            VerticalOptions="Center"
            HorizontalOptions="Center" />
+    </StackLayout>
 </ContentPage>
