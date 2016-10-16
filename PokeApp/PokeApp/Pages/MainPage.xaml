@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:PokeApp.Behaviors;assembly=PokeApp"
+             x:Class="PokeApp.Pages.MainPage" NavigationPage.BackButtonTitle="" Title="Gotta catch 'em all!">
+    <ListView ItemsSource="{Binding LogItems}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+        <ListView.Behaviors>
+            <behaviors:ListViewSelectedItemBehavior Command="{Binding ItemSelectedCommand}" />
+        </ListView.Behaviors>
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ImageCell ImageSource="{Binding Pokemon.ImageUrl}" Text="{Binding Pokemon.Name}" Detail="{Binding Description}"></ImageCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

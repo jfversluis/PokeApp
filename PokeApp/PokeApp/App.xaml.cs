@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using FreshMvvm;
+using FreshTinyIoC;
+using PokeApp.Interfaces;
+using PokeApp.PageModels;
+using PokeApp.Services;
 using Xamarin.Forms;
 
 namespace PokeApp
@@ -13,7 +13,14 @@ namespace PokeApp
         {
             InitializeComponent();
 
-            MainPage = new PokeApp.MainPage();
+            RegisterDependencies();
+
+            MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainPageModel>());
+        }
+
+        private void RegisterDependencies()
+        {
+            FreshTinyIoCContainer.Current.Register<IPokeApiService>(new PokeApiService());
         }
 
         protected override void OnStart()
