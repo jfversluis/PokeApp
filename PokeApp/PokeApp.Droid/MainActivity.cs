@@ -1,11 +1,7 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using FFImageLoading.Forms.Droid;
 
 namespace PokeApp.Droid
 {
@@ -20,8 +16,8 @@ namespace PokeApp.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            CachedImageRenderer.Init();
             LoadApplication(new App());
         }
     }
 }
-

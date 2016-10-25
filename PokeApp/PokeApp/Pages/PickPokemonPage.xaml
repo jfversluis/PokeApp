@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:PokeApp.Behaviors;assembly=PokeApp"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="PokeApp.Pages.PickPokemonPage" Title="Choose your Pokemon">
+    <StackLayout>
+        <SearchBar Text="{Binding SearchTerm}" IsEnabled="{Binding IsNotLoading}"></SearchBar>
+        <ListView ItemsSource="{Binding Pokemon}" SelectedItem="{Binding SelectedPokemon, Mode=TwoWay}" IsVisible="{Binding IsNotLoading}">
+            <ListView.Behaviors>
+                <behaviors:ListViewSelectedItemBehavior Command="{Binding ItemSelectedCommand}" />
+            </ListView.Behaviors>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell Height="45">
+                        <Grid Padding="5,5,5,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <forms:CachedImage Grid.RowSpan="2" Grid.Column="0" LoadingPlaceholder="user_default.png" ErrorPlaceholder="user_default.png" Source="{Binding ImageUrl}" Aspect="AspectFill" HorizontalOptions="Center" TransformPlaceholders="True">
+                                <forms:CachedImage.Transformations>
+                                    <transformations:CircleTransformation />
+                                </forms:CachedImage.Transformations>
+                            </forms:CachedImage>
+                            <Label Grid.Row="0" FontSize="14" Grid.Column="1" VerticalTextAlignment="End" Text="{Binding Name}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

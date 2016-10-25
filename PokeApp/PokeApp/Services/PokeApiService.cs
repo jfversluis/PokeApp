@@ -59,5 +59,15 @@ namespace PokeApp.Services
 
             return await PokeApi.GetFeedFromIdLimitAsync(fromId, limit);
         }
+
+        public async Task PostFeedItem(LogEntry entry)
+        {
+            await PokeApi.PostLogEntryAsync(entry);
+        }
+
+        public async Task<IEnumerable<Pokemon>> GetPokemonAsync()
+        {
+            return await PokeApi.GetPokemonAsync();
+        }
     }
 }

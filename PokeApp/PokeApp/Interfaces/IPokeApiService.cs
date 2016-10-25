@@ -11,5 +11,9 @@ namespace PokeApp.Interfaces
         Task<IEnumerable<LogItem>> GetFeedAsync(int fromId);
 
         Task<IEnumerable<LogItem>> GetFeedAsync(int fromId, int limit);
+
+        Task PostFeedItem(LogEntry entry);
+
+        Task<IEnumerable<Pokemon>> GetPokemonAsync();
     }
 }

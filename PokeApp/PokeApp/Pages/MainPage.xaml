@@ -2,15 +2,39 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:behaviors="clr-namespace:PokeApp.Behaviors;assembly=PokeApp"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              x:Class="PokeApp.Pages.MainPage" NavigationPage.BackButtonTitle="" Title="Gotta catch 'em all!">
-    <ListView ItemsSource="{Binding LogItems}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New" Command="{Binding NewFeedItemCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ListView ItemsSource="{Binding LogItems}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" RefreshCommand="{Binding FeedRefreshCommand}" IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsLoading}">
         <ListView.Behaviors>
             <behaviors:ListViewSelectedItemBehavior Command="{Binding ItemSelectedCommand}" />
         </ListView.Behaviors>
 
         <ListView.ItemTemplate>
             <DataTemplate>
-                <ImageCell ImageSource="{Binding Pokemon.ImageUrl}" Text="{Binding Pokemon.Name}" Detail="{Binding Description}"></ImageCell>
+                <ViewCell Height="45">
+                    <Grid Padding="5,5,5,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ffimageloading:CachedImage Grid.RowSpan="2" Grid.Column="0" LoadingPlaceholder="user_default.png" ErrorPlaceholder="user_default.png" Source="{Binding Pokemon.ImageUrl}" Aspect="AspectFill" HorizontalOptions="Center" TransformPlaceholders="True">
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation />
+                            </ffimageloading:CachedImage.Transformations>
+                        </ffimageloading:CachedImage>
+                        <Label Grid.Row="0" FontSize="14" Grid.Column="1" VerticalTextAlignment="End" Text="{Binding Pokemon.Name}" />
+                        <Label Margin="0,-5,0,0" Grid.Row="1" FontSize="12" FontFamily="OpenSans" Grid.Column="1" VerticalTextAlignment="Start" Text="{Binding HumanDescription}" TextColor="Accent" />
+                    </Grid>
+                </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

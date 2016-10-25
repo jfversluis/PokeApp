@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Humanizer;
+using System;
 
 namespace PokeApp.Models
 {
-#warning Don't try this at home! Share your models between projects
-
     public class LogItem
     {
         public int Id { get; set; }
@@ -14,6 +13,11 @@ namespace PokeApp.Models
         public string Description
         {
             get { return $"{CaughtAt.ToString("dd-MM-yyyy hh:mm")} by: {CaughtBy?.Name}"; }
+        }
+
+        public string HumanDescription
+        {
+            get { return $"{CaughtAt.Humanize()} by: {CaughtBy?.Name}"; }
         }
     }
 }

@@ -18,5 +18,13 @@ namespace PokeApp.Interfaces
         [Get("/feed/from/{fromId}/take/{limit}")]
         [Headers("Authorization: Bearer")]
         Task<IEnumerable<LogItem>> GetFeedFromIdLimitAsync(int fromId, int limit);
+
+        [Post("/feed")]
+        [Headers("Authorization: Bearer")]
+        Task PostLogEntryAsync(LogEntry entry);
+
+        [Get("/pokemons")]
+        [Headers("Authorization: Bearer")]
+        Task<IEnumerable<Pokemon>> GetPokemonAsync();
     }
 }
